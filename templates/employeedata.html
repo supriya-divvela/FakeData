@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+<html>
+    <head>
+        <title>
+            Fake Data
+        </title>
+    </head>
+    {% include 'cdnlines.html' %}
+    <body>
+        {% include 'navbar.html' %}
+        {% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST">
+                        {% csrf_token %} 
+                        <label>Enter Any Details:</label>
+                        <input type="text" name="job" required>
+                        <input type="submit" value="Search" class="btn btn-success"></form> 
+                    {% if employees %}
+                    <table class="table table-bordered text-center">
+                    <thead class="text-center">
+                        <tr>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Email</th>
+                            <th>Job</th>
+                            <th>Salary</th>
+                            <th>City</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    {% for i in employees %}
+                    <tbody>
+                        <tr>
+                            <td>{{i.firstname}}</td>
+                            <td>{{i.lastname}}</td>
+                            <td>{{i.email}}</td>
+                            <td>{{i.job}}</td>
+                            <td>{{i.salary}}</td>
+                            <td>{{i.city}}</td>
+                            <td>{{i.state}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}</table>
+                    {% else %}
+                    <h1>No Data Available</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>
